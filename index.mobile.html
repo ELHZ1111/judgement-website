@@ -35,10 +35,11 @@
       min-width: 160px;
       height: auto;
       z-index: 1;
-      opacity: 0.13;
+      opacity: 0.33; /* Increased opacity */
       pointer-events: none;
       background: none;
       transition: opacity 0.25s;
+      filter: drop-shadow(0 0 18px #000); /* Add shadow for contrast */
     }
     .main-content {
       position: relative;
@@ -101,7 +102,7 @@
     footer {
       text-align: center;
       color: #888;
-      font-size: 0.98em;
+      font-size: 0.74em; /* <--- smaller text */
       padding: 15px 0 12px;
       background: transparent;
       z-index: 20;
@@ -112,7 +113,7 @@
       .statue-center-bg {
         width: 92vw;
         max-width: 99vw;
-        opacity: 0.14;
+        opacity: 0.38; /* Make more visible on mobile */
       }
       .logo-img {
         width: 98vw;
@@ -133,6 +134,9 @@
       .store-btn {
         width: 84px;
         height: 28px;
+      }
+      footer {
+        font-size: 0.69em; /* even smaller on mobile */
       }
     }
   </style>
