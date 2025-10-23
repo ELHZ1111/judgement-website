@@ -58,9 +58,10 @@
       filter: drop-shadow(0 0 32px #000);
       background: none;
       opacity: 1;
+      transition: width 0.3s, max-width 0.3s;
     }
 
-    /* Mobile: statue centered, leaderboard/category hidden */
+    /* Mobile: statue centered and bigger, leaderboard/category/rank hidden */
     @media (max-width: 700px) {
       .statue-fixed {
         position: fixed;
@@ -69,24 +70,23 @@
         right: auto;
         bottom: auto;
         transform: translate(-50%, -50%);
-        width: 60vw;
-        max-width: 400px;
-        min-width: 160px;
+        width: 99vw;
+        max-width: 700px;
+        min-width: 200px;
         height: auto;
-        opacity: 0.33;
+        opacity: 0.38;
         display: block;
         z-index: 1;
         background: none;
       }
       .statue-fixed img {
-        filter: drop-shadow(0 0 18px #000);
-        opacity: 1;
-        width: 100%;
-        max-width: 99vw;
+        width: 95vw;
+        max-width: 700px;
         height: auto;
       }
       .category-bar,
-      .leaderboard-box {
+      .leaderboard-box,
+      #rankModeBar {
         display: none !important;
       }
       .logo-box {
@@ -189,6 +189,18 @@
       padding-bottom: 0;
       position: relative;
     }
+    #rankModeBar {
+      width: 100%;
+      max-width: 940px;
+      margin: 10px auto 0 auto;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 0;
+      position: relative;
+      flex-wrap: wrap;
+    }
     .leaderboard-box {
       background: none !important;
       border-radius: 0 !important;
@@ -284,6 +296,7 @@
       </a>
     </div>
     <div class="category-bar" id="categoryBar"></div>
+    <div id="rankModeBar"></div>
     <div class="leaderboard-box">
       <div class="leaderboard-scroll">
         <div id="leaderboard"></div>
