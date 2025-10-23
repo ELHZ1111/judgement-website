@@ -5,6 +5,15 @@
   <title>Judgement</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <!-- Mobile auto-redirect -->
+  <script>
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) &&
+      window.location.pathname.endsWith("index.html")
+    ) {
+      window.location.href = "mobile.index.html";
+    }
+  </script>
   <style>
     html, body {
       margin: 0;
@@ -117,7 +126,6 @@
     .store-btn:active, .store-btn:focus {
       box-shadow: 0 4px 18px #111c;
     }
-    /* --- Center SVG badges using a flex wrapper --- */
     .store-badge-wrap {
       display: flex;
       align-items: center;
@@ -138,7 +146,7 @@
     .category-bar {
       width: 100%;
       max-width: 940px;
-      margin: 120px auto 0 auto; /* <-- push it down further */
+      margin: 120px auto 0 auto;
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
@@ -161,7 +169,6 @@
       display: flex;
       flex-direction: column;
     }
-    /* 16 rows at ~34px each = 544px */
     .leaderboard-scroll {
       max-height: 544px;
       overflow-y: auto;
