@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Judgement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100vw;
+      background: #000;
+      color: #fff;
+      font-family: 'EB Garamond', 'Segoe UI', Arial, sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body {
+      position: relative;
+      min-height: 100vh;
+      background: #000;
+    }
+    .black-filter {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.18);
+      pointer-events: none;
+      z-index: 100;
+      mix-blend-mode: multiply;
+    }
+    .statue-fixed {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      height: 100vh;
+      width: 37vw;
+      max-width: 430px;
+      min-width: 160px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 1;
+      background: none;
+    }
+    .statue-fixed img {
+      width: 100%;
+      height: auto;
+      max-height: 100vh;
+      object-fit: contain;
+      filter: drop-shadow(0 0 32px #000);
+      background: none;
+      opacity: 1;
+    }
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 18px;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo-box {
+      background: none;
+      border-radius: 0;
+      padding: 44px 0 0 0;
+      margin-top: 0px;
+      margin-bottom: 0;
+      width: 100%;
+      max-width: 1200px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 11;
+    }
+    .logo-img {
+      width: 100%;
+      max-width: 1100px;
+      min-width: 220px;
+      height: auto;
+      margin-bottom: 0;
+      display: block;
+      background: none;
+      opacity: 1;
+    }
+    .store-row {
+      display: flex;
+      justify-content: center;
+      gap: 37px;
+      margin: 24px 0 0 0;
+      margin-bottom: 38px;
+      z-index: 11;
+    }
+    .store-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      outline: none;
+      cursor: pointer;
+      border-radius: 7px;
+      box-shadow: 0 2px 13px #111a;
+      transition: box-shadow 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .store-btn:active, .store-btn:focus {
+      box-shadow: 0 4px 18px #111c;
+    }
+    /* --- Center SVG badges using a flex wrapper --- */
+    .store-badge-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 190px;
+      height: 56px;
+      max-width: 95vw;
+      overflow: hidden;
+    }
+    .store-badge {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+      vertical-align: middle;
+    }
+    .category-bar {
+      width: 100%;
+      max-width: 940px;
+      margin: 120px auto 0 auto; /* <-- push it down further */
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      z-index: 12;
+      padding-bottom: 0;
+      position: relative;
+    }
+    .leaderboard-box {
+      background: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 32px auto 32px auto;
+      padding: 0;
+      max-width: 940px;
+      width: 100%;
+      position: relative;
+      border: none !important;
+      z-index: 9;
+      display: flex;
+      flex-direction: column;
+    }
+    /* 16 rows at ~34px each = 544px */
+    .leaderboard-scroll {
+      max-height: 544px;
+      overflow-y: auto;
+      width: 100%;
+      padding: 0;
+      background: none !important;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto 34px;
+      background: transparent !important;
+      border: none !important;
+    }
+    th, td {
+      padding: 7px 6px;
+      text-align: left;
+      background: transparent !important;
+      border: none !important;
+      font-size: 0.97em !important;
+    }
+    th {
+      color: #fff !important;
+      font-weight: bold !important;
+    }
+    td {
+      color: #bbb !important;
+      font-weight: normal !important;
+    }
+    tr:nth-child(even) td { background: none !important; }
+    .rank, .resonate, .reject, .ambivalent, .percent {
+      color: #bbb !important;
+      font-weight: normal !important;
+    }
+    .loading { color: #aaa; text-align: center; margin: 36px 0; font-size: 1em; }
+    .error { color: #f04848; text-align: center; margin: 36px 0; font-size: 0.98em; }
+    footer {
+      text-align: center;
+      color: #888;
+      font-size: 0.98em;
+      padding: 28px 0 12px;
+      background: transparent;
+      z-index: 20;
+      margin-top: 30px;
+    }
+    @media (max-width: 1100px) {
+      .logo-box { max-width: 99vw; }
+      .logo-img { max-width: 99vw; }
+      .statue-fixed { width: 170px; max-width: 40vw;}
+      .main-content { padding: 0 5vw; }
+      .leaderboard-box { max-width: 99vw; }
+      .leaderboard-scroll { max-height: 320px; }
+      .store-badge-wrap { width: 120px; height: 38px;}
+      .store-badge { width: 100%; height: 100%; }
+      .category-bar { margin-top: 80px; }
+      th, td { font-size: 0.92em !important; padding: 5px 4px; }
+    }
+    @media (max-width: 700px) {
+      .statue-fixed { display: none; }
+      .logo-box { padding: 18px 0 8px 0; margin-top: 0px; }
+      .logo-img { max-width: 99vw; }
+      .store-row { gap: 13px; margin: 18px 0 0 0; margin-bottom: 22px; }
+      .store-badge-wrap { width: 84px; height: 28px;}
+      .store-badge { width: 100%; height: 100%; }
+      .leaderboard-box { margin: 110px auto 12px auto; }
+      .leaderboard-scroll { max-height: 180px; }
+      th, td { font-size: 0.9em !important; padding: 7px 2px; }
+      .category-bar { margin-top: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="black-filter"></div>
+  <div class="statue-fixed">
+    <img src="assets/judgement.png" alt="Lady Justice" />
+  </div>
+  <div class="main-content">
+    <div class="logo-box">
+      <img src="assets/judgement-graphic.png" alt="Judgement Logo" class="logo-img" />
+    </div>
+    <div class="store-row">
+      <a href="https://apps.apple.com/app/id1518880489" class="store-btn appstore" target="_blank" rel="noopener">
+        <span class="store-badge-wrap">
+          <img src="assets/appstore-badge.svg" alt="Download on the App Store" class="store-badge" />
+        </span>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.judgement.app" class="store-btn playstore" target="_blank" rel="noopener">
+        <span class="store-badge-wrap">
+          <img src="assets/googleplay-badge.svg" alt="Get it on Google Play" class="store-badge" />
+        </span>
+      </a>
+    </div>
+    <div class="category-bar" id="categoryBar"></div>
+    <div class="leaderboard-box">
+      <div class="leaderboard-scroll">
+        <div id="leaderboard"></div>
+      </div>
+    </div>
+    <footer>
+      &copy; 2025 Judgement. All rights reserved.
+    </footer>
+  </div>
+  <script src="js/leaderboard.js"></script>
+</body>
+</html>
