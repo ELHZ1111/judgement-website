@@ -17,11 +17,15 @@
       font-family: 'EB Garamond', 'Segoe UI', Arial, sans-serif;
       overflow-x: hidden;
       position: relative;
+      height: 100%;
     }
     body {
       position: relative;
       min-height: 100vh;
       background: #000;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
     .black-filter {
       position: fixed;
@@ -61,45 +65,6 @@
       transition: width 0.3s, max-width 0.3s;
     }
 
-    /* Mobile: statue centered and bigger, leaderboard/category/rank hidden */
-    @media (max-width: 700px) {
-      .statue-fixed {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        right: auto;
-        bottom: auto;
-        transform: translate(-50%, -50%);
-        width: 99vw;
-        max-width: 700px;
-        min-width: 200px;
-        height: auto;
-        opacity: 0.38;
-        display: block;
-        z-index: 1;
-        background: none;
-      }
-      .statue-fixed img {
-        width: 95vw;
-        max-width: 700px;
-        height: auto;
-      }
-      .category-bar,
-      .leaderboard-box,
-      #rankModeBar {
-        display: none !important;
-      }
-      .logo-box {
-        padding: 18px 0 8px 0; margin-top: 0px; max-width: 99vw;
-      }
-      .logo-img {
-        width: 98vw;
-        max-width: 99vw;
-      }
-      .store-row { gap: 13px; margin: 18px 0 0 0; margin-bottom: 22px; }
-      .store-badge-wrap { width: 84px; height: 28px;}
-      .store-badge { width: 100%; height: 100%; }
-    }
     .main-content {
       max-width: 1200px;
       margin: 0 auto;
@@ -109,6 +74,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      flex: 1 0 auto;
     }
     .logo-box {
       background: none;
@@ -259,6 +225,85 @@
       background: transparent;
       z-index: 20;
       margin-top: 30px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 700px) {
+      body {
+        min-height: 100vh;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .statue-fixed {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+        width: 99vw;
+        max-width: 700px;
+        min-width: 200px;
+        height: auto;
+        opacity: 0.38;
+        display: block;
+        z-index: 1;
+        background: none;
+      }
+      .statue-fixed img {
+        width: 95vw;
+        max-width: 700px;
+        height: auto;
+      }
+      .category-bar,
+      .leaderboard-box,
+      #rankModeBar {
+        display: none !important;
+      }
+      .main-content {
+        flex: 1 0 auto;
+        width: 100vw;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
+      .logo-box {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        max-width: 99vw;
+        padding: 0;
+        margin: 0;
+        min-height: 60vh;
+      }
+      .logo-img {
+        width: 80vw;
+        max-width: 350px;
+        margin: 0 auto 0 auto;
+        display: block;
+      }
+      .store-row { gap: 13px; margin: 18px 0 0 0; margin-bottom: 22px; }
+      .store-badge-wrap { width: 84px; height: 28px;}
+      .store-badge { width: 100%; height: 100%; }
+      footer {
+        font-size: 0.74em;
+        padding: 10px 0 8px;
+        margin-top: 0;
+        position: static;
+        width: 100vw;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        flex-shrink: 0;
+      }
     }
     @media (max-width: 1100px) {
       .logo-box { max-width: 99vw; }
@@ -302,10 +347,10 @@
         <div id="leaderboard"></div>
       </div>
     </div>
-    <footer>
-      &copy; 2025 Judgement. All rights reserved.
-    </footer>
   </div>
+  <footer>
+    &copy; 2025 Judgement. All rights reserved.
+  </footer>
   <script src="js/leaderboard.js"></script>
 </body>
 </html>
