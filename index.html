@@ -9,7 +9,10 @@
   <script>
     if (
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) &&
-      window.location.pathname.endsWith("index.html")
+      (
+        window.location.pathname === "/" ||
+        window.location.pathname.endsWith("index.html")
+      )
     ) {
       window.location.href = "mobile.index.html";
     }
